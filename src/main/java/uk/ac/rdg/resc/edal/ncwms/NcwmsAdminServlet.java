@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013 The University of Reading
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -13,7 +13,7 @@
  * 3. Neither the name of the University of Reading, nor the names of the
  *    authors or contributors may be used to endorse or promote products
  *    derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -285,13 +285,15 @@ public class NcwmsAdminServlet extends HttpServlet {
             } else {
                 ds.setTitle(request.getParameter("dataset." + ds.getId() + ".title"));
                 String newLocation = request.getParameter("dataset." + ds.getId() + ".location");
-                if (!newLocation.trim().equals(ds.getLocation().trim())) {
+                String currentLocation=(ds.getLocation() != null)?ds.getLocation():"";
+                if (!newLocation.trim().equals(currentLocation.trim())) {
                     refreshDataset = true;
                 }
                 ds.setLocation(newLocation);
                 String newDataReaderClass = request.getParameter("dataset." + ds.getId()
                         + ".reader");
-                if (!newDataReaderClass.trim().equals(ds.getDataReaderClass().trim())) {
+                String currentDataReaderClass=(ds.getDataReaderClass() != null)?ds.getDataReaderClass():"";
+                if (!newDataReaderClass.trim().equals(currentDataReaderClass.trim())) {
                     refreshDataset = true;
                 }
                 ds.setDataReaderClass(newDataReaderClass);
@@ -311,6 +313,10 @@ public class NcwmsAdminServlet extends HttpServlet {
 
                 ds.setMetadataUrl(request.getParameter("dataset." + ds.getId() + ".metadataUrl"));
                 ds.setMetadataDesc(request.getParameter("dataset." + ds.getId() + ".metadataDesc"));
+
+                ds.setDatasetMetadataURL(request.getParameter("dataset." + ds.getId() + ".datasetMetadataURL"));
+                ds.setServiceMetadataURL(request.getParameter("dataset." + ds.getId() + ".serviceMetadataURL"));
+
                 ds.setMetadataMimetype(request.getParameter("dataset." + ds.getId()
                         + ".metadataMimetype"));
 
