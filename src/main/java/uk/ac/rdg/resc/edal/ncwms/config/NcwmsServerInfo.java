@@ -59,6 +59,8 @@ public class NcwmsServerInfo implements ServerInfo {
     private List<String> keywords = null;
     @XmlElement(name = "url")
     private String url = "";
+    @XmlElement(name = "inspireServiceMetadataURL")
+    private String inspireServiceMetadataURL = "";
     @XmlElement(name = "allowglobalcapabilities")
     private boolean globalCapabilities = true;
 
@@ -66,7 +68,7 @@ public class NcwmsServerInfo implements ServerInfo {
     }
 
     public NcwmsServerInfo(String title, boolean allowFeatureInfo, int maxImageWidth,
-            int maxImageHeight, String description, List<String> keywords, String url,
+            int maxImageHeight, String description, List<String> keywords, String url, String inspireServiceMetadataURL,
             boolean globalCapabilities) {
         super();
         this.title = title;
@@ -76,6 +78,7 @@ public class NcwmsServerInfo implements ServerInfo {
         this.description = description;
         this.keywords = keywords;
         this.url = url;
+        this.inspireServiceMetadataURL = inspireServiceMetadataURL;
         this.globalCapabilities = globalCapabilities;
     }
 
@@ -98,7 +101,7 @@ public class NcwmsServerInfo implements ServerInfo {
     public int getMaxImageHeight() {
         return maxImageHeight;
     }
-    
+
     @Override
     public int getMaxSimultaneousLayers() {
         return 1;
@@ -108,7 +111,7 @@ public class NcwmsServerInfo implements ServerInfo {
     public List<String> getKeywords() {
         return keywords;
     }
-    
+
     public boolean allowsFeatureInfo() {
         return allowFeatureInfo;
     }
@@ -117,10 +120,15 @@ public class NcwmsServerInfo implements ServerInfo {
         return url;
     }
 
+    @Override
+    public String getInspireServiceMetadataURL() {
+        return inspireServiceMetadataURL;
+    }
+
     public boolean allowsGlobalCapabilities() {
         return globalCapabilities;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -150,6 +158,10 @@ public class NcwmsServerInfo implements ServerInfo {
         this.url = url;
     }
 
+    public void setInspireServiceMetadataURL(String inspireServiceMetadataURL) {
+        this.inspireServiceMetadataURL = inspireServiceMetadataURL;
+    }
+
     public void setAllowGlobalCapabilities(boolean globalCapabilities) {
         this.globalCapabilities = globalCapabilities;
     }
@@ -175,7 +187,8 @@ public class NcwmsServerInfo implements ServerInfo {
         sb.append(globalCapabilities);
         return sb.toString();
     }
-    
+
+
     private static class KeywordsAdapter extends XmlAdapter<String, List<String>> {
         private KeywordsAdapter() {}
         

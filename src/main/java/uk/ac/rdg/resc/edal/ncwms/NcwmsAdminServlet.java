@@ -266,6 +266,7 @@ public class NcwmsAdminServlet extends HttpServlet {
         server.setDescription(request.getParameter("server.abstract"));
         server.setKeywords(request.getParameter("server.keywords"));
         server.setUrl(request.getParameter("server.url"));
+        server.setInspireServiceMetadataURL(request.getParameter("server.inspireServiceMetadataURL"));
         server.setMaxImageWidth(Integer.parseInt(request.getParameter("server.maximagewidth")));
         server.setMaxImageHeight(Integer.parseInt(request.getParameter("server.maximageheight")));
         server.setAllowFeatureInfo(request.getParameter("server.allowfeatureinfo") != null);
@@ -285,14 +286,14 @@ public class NcwmsAdminServlet extends HttpServlet {
             } else {
                 ds.setTitle(request.getParameter("dataset." + ds.getId() + ".title"));
                 String newLocation = request.getParameter("dataset." + ds.getId() + ".location");
-                String currentLocation=(ds.getLocation() != null)?ds.getLocation():"";
+                String currentLocation = (ds.getLocation() != null) ? ds.getLocation() : "";
                 if (!newLocation.trim().equals(currentLocation.trim())) {
                     refreshDataset = true;
                 }
                 ds.setLocation(newLocation);
                 String newDataReaderClass = request.getParameter("dataset." + ds.getId()
                         + ".reader");
-                String currentDataReaderClass=(ds.getDataReaderClass() != null)?ds.getDataReaderClass():"";
+                String currentDataReaderClass = (ds.getDataReaderClass() != null) ? ds.getDataReaderClass() : "";
                 if (!newDataReaderClass.trim().equals(currentDataReaderClass.trim())) {
                     refreshDataset = true;
                 }
@@ -374,6 +375,8 @@ public class NcwmsAdminServlet extends HttpServlet {
                         + ".updateinterval")));
                 ds.setMoreInfo(request.getParameter("dataset.new" + i + ".moreinfo"));
                 ds.setCopyrightStatement(request.getParameter("dataset.new" + i + ".copyright"));
+                ds.setDatasetMetadataURL(request.getParameter("dataset.new" + i + ".datasetMetadataURL"));
+                ds.setServiceMetadataURL(request.getParameter("dataset.new" + i + ".serviceMetadataURL"));
                 /*
                  * addDataset() contains code to ensure that the dataset loads
                  * its metadata at the next opportunity
@@ -426,6 +429,9 @@ public class NcwmsAdminServlet extends HttpServlet {
                 String newDataReaderClass = request.getParameter("dynamicService." + ds.getAlias()
                         + ".reader");
                 ds.setDataReaderClass(newDataReaderClass);
+
+                ds.setDatasetMetadataURL(request.getParameter("dynamicService." + ds.getAlias() + ".datasetMetadataURL"));
+                ds.setServiceMetadataURL(request.getParameter("dynamicService." + ds.getAlias() + ".serviceMetadataURL"));
             }
         }
         /*
@@ -463,6 +469,8 @@ public class NcwmsAdminServlet extends HttpServlet {
                 ds.setDisabled(request.getParameter("dynamicService.new" + i + ".disabled") != null);
                 ds.setQueryable(request.getParameter("dynamicService.new" + i + ".queryable") != null);
                 ds.setDataReaderClass(request.getParameter("dynamicService.new" + i + ".reader"));
+                ds.setDatasetMetadataURL(request.getParameter("dynamicService.new" + i + ".datasetMetadataURL"));
+                ds.setServiceMetadataURL(request.getParameter("dynamicService.new" + i + ".serviceMetadataURL"));
                 catalogue.getConfig().addDynamicService(ds);
             }
             i++;

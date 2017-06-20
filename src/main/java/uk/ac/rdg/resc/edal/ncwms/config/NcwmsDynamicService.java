@@ -62,9 +62,16 @@ public class NcwmsDynamicService {
 
     @XmlAttribute(name = "downloadable", required = false)
     private boolean downloadable;
-    
+
     @XmlTransient
     private Pattern idMatchPattern;
+
+    @XmlAttribute(name = "datasetMetadataURL")
+    private String datasetMetadataURL = "";
+
+    @XmlAttribute(name = "serviceMetadataURL")
+    private String serviceMetadataURL = "";
+
 
     public String getAlias() {
         return alias;
@@ -104,7 +111,11 @@ public class NcwmsDynamicService {
     }
 
     public void setDataReaderClass(String dataReaderClass) {
-        this.dataReaderClass = dataReaderClass.trim();
+        if (dataReaderClass != null) {
+            this.dataReaderClass = dataReaderClass.trim();
+        } else {
+            this.dataReaderClass = "";
+        }
     }
 
     public String getCopyrightStatement() {
@@ -112,7 +123,9 @@ public class NcwmsDynamicService {
     }
 
     public void setCopyrightStatement(String copyrightStatement) {
-        this.copyrightStatement = copyrightStatement.trim();
+        if (!"".equals(copyrightStatement)) {
+            this.copyrightStatement = copyrightStatement;
+        }
     }
 
     public String getMoreInfo() {
@@ -120,7 +133,9 @@ public class NcwmsDynamicService {
     }
 
     public void setMoreInfo(String moreInfo) {
-        this.moreInfo = moreInfo.trim();
+        if (!"".equals(moreInfo)) {
+            this.moreInfo = moreInfo;
+        }
     }
 
     public boolean isDisabled() {
@@ -130,7 +145,7 @@ public class NcwmsDynamicService {
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
     }
-    
+
     public boolean isDownloadable() {
         return downloadable;
     }
@@ -138,8 +153,24 @@ public class NcwmsDynamicService {
     public boolean isQueryable() {
         return queryable;
     }
-    
+
     public void setQueryable(boolean queryable) {
         this.queryable = queryable;
+    }
+
+    public String getDatasetMetadataURL() {
+        return datasetMetadataURL;
+    }
+
+    public void setDatasetMetadataURL(String datasetMetadataURL) {
+        this.datasetMetadataURL = datasetMetadataURL;
+    }
+
+    public String getServiceMetadataURL() {
+        return serviceMetadataURL;
+    }
+
+    public void setServiceMetadataURL(String serviceMetadataURL) {
+        this.serviceMetadataURL = serviceMetadataURL;
     }
 }

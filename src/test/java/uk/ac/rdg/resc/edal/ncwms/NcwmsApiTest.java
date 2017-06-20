@@ -88,7 +88,7 @@ public class NcwmsApiTest {
         NcwmsContact contact = new NcwmsContact("Guy", "ReSC", "5217", "g.g");
 
         NcwmsServerInfo serverInfo = new NcwmsServerInfo("servername", true, 100, 50,
-                "a fake server", Arrays.asList("fake", "con", "front"), "http://google.com",
+                "a fake server", Arrays.asList("fake", "con", "front"), "http://google.com","",
                 true);
         CacheInfo cacheInfo = new CacheInfo(true, 2000, 10.0f);
         String[] codes = {"CRS:187", "EPSG:187"};

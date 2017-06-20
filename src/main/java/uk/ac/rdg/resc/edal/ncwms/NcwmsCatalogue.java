@@ -256,6 +256,16 @@ public class NcwmsCatalogue extends DataCatalogue implements WmsCatalogue {
                 public boolean isDisabled() {
                     return dynamicService.isDisabled();
                 }
+
+                @Override
+                public String getDatasetMetadataURL() {
+                    return null;
+                }
+
+                @Override
+                public String getServiceMetadataURL() {
+                    return null;
+                }
             };
             return metadata;
         }
