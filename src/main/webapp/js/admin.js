@@ -54,4 +54,21 @@ $('#add_dynamic_button').on('click', function () {
 });
 
 
+$('.delete_row').on('click', function () {
+    console.log("DELETE:" + this.id);
+    let id = this.id;
+    $.post('deleteDataset', {'id': this.id}, function () {
+        console.log(id);
+        $("#row" + id).remove();
+    });
+});
+
+$('.delete_dynamic_row').on('click', function () {
+    console.log("DELETE Dynamic:" + this.id);
+    let id = this.id;
+    $.post('deleteDynamicService', {'alias': this.id}, function () {
+        console.log(id);
+        $("#row_dynamic" + id).remove();
+    });
+});
 

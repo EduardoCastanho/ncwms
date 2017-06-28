@@ -4,6 +4,10 @@
         integrity="sha256-tzp6mtxeugpv7nF5uY4rqr1ZxZynL8F7G5MCwYxJkmY=" crossorigin="anonymous"/>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Administrative interface to ncWMS</title>
+  <style>
+    label{ white-space: nowrap;}
+  </style>
+
 </head>
 <body>
 
@@ -66,7 +70,7 @@
         <table class="table is-bordered is-striped is-narrow">
           <tbody id="dataset_body">
               #foreach($dataset in $config.datasets)
-              <tr>
+              <tr id="row$!dataset.id">
                 <td>
                   <br/>
                   <div class="columns" style="margin-bottom: 0">
@@ -200,8 +204,9 @@
                              type=button #if($dataset.disabled)disabled#end>Force refresh</a>
                         </div>
                         <div class="panel-block">
-                          <a class="button is-danger is-outlined is-fullwidth" href="forceRefresh?dataset=$!dataset.id"
-                             type=button>Delete</a>
+                          <button id="$!dataset.id" class="button is-danger is-outlined is-fullwidth delete_row" type=button>Delete</button>
+                          <!-- href="deleteDataset?dataset=$!dataset.id" -->
+
                         </div>
                       </div>
                     </div>
@@ -386,64 +391,6 @@
               * It was not removed because may become usefull later.*#
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </script>
       </div>
       <div id='tab2'>
@@ -460,7 +407,7 @@
         <table class="table is-bordered is-striped is-narrow">
           <tbody id="dynamic_body">
               #foreach($dynamicService in $config.dynamicServices)
-              <tr>
+              <tr id="row_dynamic$!{dynamicService.alias}">
                 <td>
                   <div class="columns" style="margin-bottom: 0">
                     <div class="column  ">
@@ -565,9 +512,7 @@
                     </div>
                     <div class="column is-narrow"
                          style=" display: flex;  flex-direction: column;  justify-content: center;">
-                      <a class="button is-danger is-outlined is-fullwidth"
-                         href="forceRefresh?dataset=$!dataset.id"
-                         type=button>Delete</a>
+                      <button id="$!{dynamicService.alias}" class="button is-danger is-outlined is-fullwidth delete_dynamic_row" type=button>Delete</button>
                     </div>
                 </td>
               </tr>

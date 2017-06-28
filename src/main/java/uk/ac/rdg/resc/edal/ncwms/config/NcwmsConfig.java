@@ -137,6 +137,9 @@ public class NcwmsConfig extends CatalogueConfig {
     public synchronized void removeDynamicService(NcwmsDynamicService dynamicService) {
         dynamicServices.remove(dynamicService.getAlias());
     }
+    public synchronized void removeDynamicService(String alias){
+        dynamicServices.remove(alias);
+    }
 
     public synchronized void changeDynamicServiceId(NcwmsDynamicService dynamicService,
             String newAlias) {

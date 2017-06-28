@@ -242,6 +242,16 @@ public class NcwmsAdminServlet extends HttpServlet {
              * Update the individual variables
              */
             updateVariables(request, response);
+        } else if ("/deleteDataset".equals(path)) {
+            /*
+             * Delete Dataset
+             */
+            deleteDataset(request, response);
+        } else if ("/deleteDynamicService".equals(path)) {
+            /*
+             * Delete Dataset
+             */
+            deleteDynamicService(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
@@ -571,6 +581,26 @@ public class NcwmsAdminServlet extends HttpServlet {
              * This error isn't really important
              */
             log.error("Problem redirecting user after config update");
+        }
+    }
+
+    private void deleteDataset(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html");
+        catalogue.removeDataset(request.getParameter("id"));
+        try {
+            catalogue.getConfig().save();
+        } catch (IOException e) {
+            log.error("Problem writing config", e);
+        }
+    }
+
+    private void deleteDynamicService(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html");
+        catalogue.getConfig().removeDynamicService(request.getParameter("alias"));
+        try {
+            catalogue.getConfig().save();
+        } catch (IOException e) {
+            log.error("Problem writing config", e);
         }
     }
 
